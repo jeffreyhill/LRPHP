@@ -1,0 +1,5 @@
+Learning Registry PHP Client Library (LRPHP)
+
+Currently just a scaffold of retrieval services as defined in the LR documentation, with each getting factored out into classes as I tread through it.
+
+Dependencies so far: min. PHP 5.2.x and cURL
