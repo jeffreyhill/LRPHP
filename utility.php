@@ -18,12 +18,12 @@ class LRUtility {
     
     public static function _date($t)
     {
-        return date('c',strtotime($t));
+        return date('Y-m-d',strtotime($t));
     }
     
     public static function _datetime($t)
     {
-        return date('Y-m-d',strtotime($t));
+        return date('c',strtotime($t));
     }
     
     public static function _int($t)
