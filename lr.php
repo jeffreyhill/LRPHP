@@ -8,7 +8,6 @@ define('LREXEC',1);
 
 class LR
 {
-    protected static $args;
     protected static $ch;
     protected static $debug = false;
     protected static $errors = array();
@@ -31,8 +30,7 @@ class LR
     
     /**
      * Private function used to send requests to LR Node using cURL
-     *
-     * @param string $type - GET/POST/PUT/DELETE
+     * @param none
      * @return void  
      */
     public static function execute() {
@@ -48,14 +46,14 @@ class LR
             }
             $args = json_encode(self::getArgs());
             curl_setopt (self::$ch, CURLOPT_POSTFIELDS, $args);
-            echo $args;
+            if(self::$debug) echo $args;
         }
         if(self::getAction() == "GET")
         {
             // TODO: str_replace not necessary in PHP 5.3+ experimental
             $url .= "?".str_replace('+','%20',http_build_query(self::getArgs()));
         }
-        echo $url;
+        if(self::$debug)  echo $url;
         curl_setopt (self::$ch, CURLOPT_URL, $url);
         curl_setopt (self::$ch, CURLOPT_HTTPHEADER, array("Content-type: application/json","Content-length: 0"));
         curl_setopt (self::$ch, CURLOPT_RETURNTRANSFER, 1);
@@ -68,7 +66,11 @@ class LR
         return true;
     }
     
-    public static function getAction()
+    /**
+     * Gets the default action the service calls for (GET/POST)
+     * @return array
+    */
+    private static function getAction()
     {
         return self::$service->action;
     }
@@ -126,10 +128,10 @@ class LR
     /**
      * Loads an LR service representing an object type (i.e. node, document)
      * @return void
-    */
+    ar/*/
     private static function loadService($service)
     {
-        // Import LR service
+        // Import LR service and base
         require_once('svc'.DS.'service.php');
         require_once('svc'.DS.$service.'.php');
         // TODO: Static calls for services in PHP 5.3
