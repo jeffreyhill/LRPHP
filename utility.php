@@ -13,7 +13,7 @@ class LRUtility {
     
     public static function _boolean($t)
     {
-        return (boolean) $t;
+        return $t ? 'true' : 'false';
     }
     
     public static function _date($t)

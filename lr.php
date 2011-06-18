@@ -8,8 +8,9 @@ define('LREXEC',1);
 
 class LR
 {
+    public static $debug = false;
+    
     protected static $ch;
-    protected static $debug = false;
     protected static $errors = array();
     protected static $service;
     protected static $request;
@@ -18,11 +19,19 @@ class LR
     private function __construct() {}
     private function __clone() {}
     
+    /**
+     * Debugging
+     * @return void  
+     */
     public static function debug()
     {
         self::$debug = true;
     }
     
+    /**
+     * Retrieves error stack
+     * @return array
+     */
     public static function getErrors()
     {
         return self::$errors;
@@ -61,7 +70,7 @@ class LR
         self::$service->data = curl_exec(self::$ch);
         if(self::$service->data === false)
         {
-            self::setError('cURL_exec Error<br /><br />'.curl_error(self::$ch).'<br /><br />REQUEST:<textarea>'.$qs.'</textarea>');
+            self::setError('cURL Error<br /><br />'.curl_error(self::$ch).'<br /><br />REQUEST:<textarea>'.$qs.'</textarea>');
         }
         return true;
     }

@@ -23,13 +23,14 @@ class LRService
     {
         foreach($args as $k=>$v)
         {
-            if(!empty($this->verbs[$this->verb]->$k))
+            $arg = $this->verbs[$this->verb]->$k;
+            if(!empty($arg))
             {
                 // format indicator in service declaration
-                print_r($this->verbs[$this->verb]->$k);
-                $format = "_".$this->verbs[$this->verb]->$k[1];
+                if(LR::$debug) print_r($arg);
+                $format = "_".$arg[1];
                 $this->args->$k = LRUtility::$format($v);
-                echo $k.'>'.$this->args->$k.'<br />';
+                if(LR::$debug) echo $k.'>'.$this->args->$k.'<br />';
             }
         }
     }

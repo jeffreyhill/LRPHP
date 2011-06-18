@@ -7,7 +7,7 @@ defined('LREXEC') or die('Access denied');
 class LRConfig
 {
    // const url = 'http://localhost:5984';
-   const URL = 'http://lrdev04.learningregistry.org';
+   const URL = 'http://lrdev01.learningregistry.org';
    const DOC_TYPE = "resource_data";
    const DOC_VERSION = "0.21.0";
    const SUBMITTER_TYPE = "agent";
