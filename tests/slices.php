@@ -7,11 +7,13 @@ LR::init('slices');
 LR::debug();
 LR::setArgs(array(
     'any_tags'=>'paradata',
-    'full_docs'=>true
+    'full_docs'=>false
 ));
 $e = LR::execute();
-if($e === true)
+if($e == true)
 {
-    echo LR::getResponse();
-} else print_r(LR::getErrors());
+    $json = TidyJSON::tidy(LR::getResponse());
+    print_r(json_decode($json));
+}
+print_r(LR::getErrors());
 ?>
