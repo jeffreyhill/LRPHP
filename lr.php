@@ -46,7 +46,6 @@ class LR
         // Initialize cURL handler
         self::$ch = curl_init();
         $url = LRConfig::URL.DS.self::getServiceName();
-        curl_setopt (self::$ch, CURLOPT_POST, true);
         if(self::getAction() == "POST")
         {
             if(self::$service->getVerb())
@@ -54,7 +53,9 @@ class LR
                 $url .= DS.self::$service->getVerb();
             }
             $args = json_encode(self::getArgs());
+            curl_setopt (self::$ch, CURLOPT_POST, true);
             curl_setopt (self::$ch, CURLOPT_POSTFIELDS, $args);
+            curl_setopt (self::$ch, CURLOPT_HTTPHEADER, array("Content-type: application/json","Content-length:".strlen(implode(' ',$args))));
             if(self::$debug) echo $args;
         }
         if(self::getAction() == "GET")
@@ -62,15 +63,15 @@ class LR
             // TODO: str_replace not necessary in PHP 5.3+ experimental
             $url .= "?".str_replace('+','%20',http_build_query(self::getArgs()));
         }
-        if(self::$debug)  echo $url;
+        if(self::$debug)  echo 'URL:'.$url;
         curl_setopt (self::$ch, CURLOPT_URL, $url);
-        curl_setopt (self::$ch, CURLOPT_HTTPHEADER, array("Content-type: application/json","Content-length: 0"));
         curl_setopt (self::$ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt (self::$ch, CURLOPT_TIMEOUT, 7200);
+        curl_setopt (self::$ch, CURLOPT_TIMEOUT, 1000);
         self::$service->data = curl_exec(self::$ch);
         if(self::$service->data === false)
         {
-            self::setError('cURL Error<br /><br />'.curl_error(self::$ch).'<br /><br />REQUEST:<textarea>'.$qs.'</textarea>');
+            self::setError('cURL Error<br /><br />'.curl_error(self::$ch));
+            return false;
         }
         return true;
     }
