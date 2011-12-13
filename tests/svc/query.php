@@ -6,8 +6,9 @@ require_once('../../lr.php');
 
 class LRQueryTest extends PHPUnit_Framework_TestCase 
 {
-  public function query() {
+  public function testQuery() {
     //TODO:  Convert this to an actual PHPUnitTest
+    $this->assertFalse(TRUE);
   }
 }
 

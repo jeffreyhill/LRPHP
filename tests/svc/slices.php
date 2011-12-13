@@ -6,22 +6,23 @@ require_once('../../lr.php');
 
 class LRSlicesTest extends PHPUnit_Framework_TestCase 
 {
-  public function slice() {
+  public function testSlice() {
     //TODO:  Convert this to an actual PHPUnitTest
-    require_once('../lr.php');
-    LR::init('slices');
-    LR::debug();
-    LR::setArgs(array(
-      'any_tags'=>'paradata',
-      'full_docs'=>false
-     ));
-    $e = LR::execute();
-    if($e == true)
-    {
-      $json = TidyJSON::tidy(LR::getResponse());
-      print_r(json_decode($json));
-    }
-    print_r(LR::getErrors());
+//    require_once('../lr.php');
+//    LR::init('slices');
+//    LR::debug();
+//    LR::setArgs(array(
+//      'any_tags'=>'paradata',
+//      'full_docs'=>false
+//     ));
+//    $e = LR::execute();
+//    if($e == true)
+//    {
+//      $json = TidyJSON::tidy(LR::getResponse());
+//      print_r(json_decode($json));
+//    }
+//    print_r(LR::getErrors());
+    $this->assertFalse(TRUE);
   }
 }
 ?>

@@ -6,8 +6,9 @@ require_once('../lr.php');
 
 class LRTest extends PHPUnit_Framework_TestCase 
 {
-  public function lr() {
+  public function testLr() {
     //TODO:  Convert this to an actual PHPUnitTest
+    $this->assertFalse(TRUE);
   }
 }
 

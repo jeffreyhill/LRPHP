@@ -6,8 +6,9 @@ require_once('../../lr.php');
 
 class LRPublishTest extends PHPUnit_Framework_TestCase 
 {
-  public function publish() {
+  public function testPublish() {
     //TODO:  Convert this to an actual PHPUnitTest
+    $this->assertFalse(TRUE);
   }
 }
 
