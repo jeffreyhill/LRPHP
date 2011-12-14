@@ -23,7 +23,7 @@ class LRConfig
 		self::$url = $url;
 	}
 
-	function __set()
+	function __set($name, $value)
 	{
 		return false;
 	}
