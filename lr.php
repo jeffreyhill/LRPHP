@@ -57,10 +57,10 @@ class LR
             $args = self::getArgs();
             curl_setopt (self::$ch, CURLOPT_POST, true);
             curl_setopt (self::$ch, CURLOPT_POSTFIELDS, $args);
-            curl_setopt (self::$ch, CURLOPT_HTTPHEADER, array("Content-type: application/json","Content-length:".strlen(implode(' ',$args))));
+            curl_setopt (self::$ch, CURLOPT_HTTPHEADER, array("Content-type: application/json","Content-length:".strlen($args)));
             if(self::$debug) echo $args;
         }
-        if(self::getAction() == "GET")
+		else if(self::getAction() == "GET")
         {
             // TODO: str_replace not necessary in PHP 5.3+
             $url .= "?".str_replace('+','%20',http_build_query(self::getArgs()));

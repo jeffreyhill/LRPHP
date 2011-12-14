@@ -23,7 +23,7 @@ EOD;
 		$doc_1->tos = LRConfig::SUBMISSION_TOS_URL;
 		$doc_1->payload_placement = "inline";
 		$doc_1->resource_data_type = "metadata";
-		$doc_1->payload_schema = array("hashtags"=>"describing","resource","format");
+		$doc_1->payload_schema = array("hashtags"=>"describing","resource"=>"format");
 		$doc_1->active = true;
 		$doc_1->resource_locator = "http://www.learningregistry.org";
 		$doc_1->identity = array(
@@ -41,7 +41,7 @@ EOD;
 		{
 		    print_r(LR::getResponse());
 		} else print_r(LR::getErrors());
-		$this->assertFalse(TRUE);
+		// $this->assertFalse(TRUE);
 	}
 }
 

@@ -110,7 +110,7 @@ class LRSignature
 		$out = array(
 			'key_location' => LRConfig::GPG_URL,
 			'signature' => $signature,
-			'key_owner' => LRConfig::GPG_OWNER,
+			'key_owner' => array(LRConfig::GPG_OWNER),
 			'signing_method' => LRConfig::GPG_METHOD
 		);
 		return $out;
