@@ -4,11 +4,11 @@ require_once LRDIR.DS.'lib'.DS.'bencode.php';
 
 class LRSignature
 {
-	static function sign_file($filedata)
+	static function sign_file($hash)
 	{
 		$gpg = new Crypt_GPG();
 		$gpg->addSignKey('wegrata@gmail.com');
-		$signature = $gpg->sign($filedata, Crypt_GPG::SIGN_MODE_CLEAR);
+		$signature = $gpg->sign($hash, Crypt_GPG::SIGN_MODE_CLEAR);
 		return $signature;
 	}
 	
@@ -27,10 +27,11 @@ class LRSignature
 		} else if (is_bool($data)){ 
 			return $data ? "true" : "false";
 		}else if(is_array($data)){
-			foreach($data as $subKey => $subValue){
-				$data[$subKey] = normalize_data($subValue);
+			foreach($data as $subKey => $subValue)
+			{
+				$data[$subKey] = self::normalize_data($subValue);
 			}
-		}		
+		}
 		return $data;
 	}
 	
@@ -91,30 +92,26 @@ class LRSignature
 		if($signData == $testHash) {
 			$resultList = self::verify_file($signature);
 			$result = $resultList[0];
-			if($result->isValid()){
+			if($result->isValid())
+			{
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	function test_signing(LRDocument $document)
+	function sign(LRDocument $document)
 	{
 		$hash = self::format_data_to_sign($document);
 		$signature = self::sign_file($hash);
-		$document['digital_signature'] = array(
-			'key_location' => array('http://12.109.40.15/resource_data/key/key.asc'),
+		$out = array(
+			'key_location' => LRConfig::GPG_URL,
 			'signature' => $signature,
-			'key_owner' => 'wegrata@gmail.com',
-			'signing_method' => 'LR-PGP.1.0'
+			'key_owner' => LRConfig::GPG_OWNER,
+			'signing_method' => LRConfig::GPG_METHOD
 		);
-		return $document;
+		return $out;
 	}
 
 }
-
-	$testFile = '2011-02-28Metadata10.json';
-	$signedFile = 'signedOutput.json';
-	test_signing($testFile,$signedFile);
-	test_verify($signedFile);
 ?>

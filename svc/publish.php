@@ -29,6 +29,7 @@ class LRPublish extends LRService
 		$args = '{"documents":[';
 		foreach($this->documents as $document)
 		{
+			$document->sign();
 			$args .= json_encode($document);
 		}
 		$args .= "]}";
