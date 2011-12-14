@@ -5,6 +5,7 @@
 
 if(!defined('DS')) define('DS', '/');
 define('LREXEC',1);
+define('LRDIR',dirname(__FILE__));
 
 class LR
 {
