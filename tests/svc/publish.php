@@ -35,6 +35,10 @@ EOD;
 		LR::init('publish');
 		// Overloaded static calls only work in PHP 5.3+.  Call the service directly to add document
 		LR::getService()->addDocument($doc_1);
+		foreach(LR::getService()->documents as $document)
+		{
+			$this->assertInstanceOf('LRDocument', $document);
+		}
 		$e = LR::execute();
 		if($e == true)
 		{
