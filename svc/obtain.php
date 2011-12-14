@@ -10,10 +10,13 @@ class LRObtain extends LRService
     {
         parent::__construct();
         $this->action = "GET";
-        $this->request->by_doc_ID = array('optional','boolean',false);
-        $this->request->by_resource_ID = array('optional','boolean',true);
-        $this->request->ids_only = array('optional','boolean',false);
-        $this->request->resumption_token = array('optional','string','');
-        $this->request->request_IDs = array('optional','array',array());
+        $this->verbs = array('default'=>new LRRequest);
+        
+        $this->verbs['default']->by_doc_ID = array('optional','boolean',false);
+        $this->verbs['default']->by_resource_ID = array('optional','boolean',true);
+        $this->verbs['default']->ids_only = array('optional','boolean',false);
+        $this->verbs['default']->resumption_token = array('optional','string','');
+        $this->verbs['default']->request_ID = array('optional','string','');
+        $this->setVerb('default');
     }
 }
