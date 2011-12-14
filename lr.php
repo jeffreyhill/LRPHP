@@ -43,10 +43,11 @@ class LR
      * @param none
      * @return void  
      */
-    public static function execute() {
+    public static function execute()
+    {
         // Initialize cURL handler
         self::$ch = curl_init();
-        $url = LRConfig::URL.DS.self::getServiceName();
+        $url = LRConfig::getURL().DS.self::getServiceName();
         if(self::getAction() == "POST")
         {
             if(self::$service->getVerb() != 'default')
