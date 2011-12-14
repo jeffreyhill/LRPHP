@@ -8,7 +8,7 @@ class LRConfig
 {
 	private static $url = 'http://sandbox.learningregistry.org';
 	const DOC_TYPE = "resource_data";
-	const DOC_VERSION = "0.23.3";
+	const DOC_VERSION = "0.23.0";
 	const SUBMITTER_TYPE = "agent";
 	const SUBMISSION_TOS = "yes";
 	const SUBMISSION_TOS_URL = "http://www.learningregistry.org/tos/cc0/v0-5";

@@ -38,7 +38,7 @@ class LRDocument
 		$this->payload_placement = $doc->payload_placement;
 		$this->resource_data_type = $doc->resource_data_type;
 		$this->payload_schema = $doc->payload_schema;
-		$this->active = $doc->active == false ? 'false' : 'true';
+		$this->active = $doc->active == false ? false : true;
 		$this->resource_locator = $doc->resource_locator;
 		$this->identity = $doc->identity;
 	}
