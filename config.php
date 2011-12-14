@@ -6,6 +6,7 @@ defined('LREXEC') or die('Access denied');
 
 class LRConfig
 {
+<<<<<<< HEAD
 	private static $url = 'http://sandbox.learningregistry.org';
 	const DOC_TYPE = "resource_data";
 	const DOC_VERSION = "0.23.3";
@@ -27,5 +28,13 @@ class LRConfig
 	{
 		return false;
 	}
+=======
+   // const url = 'http://localhost:5984';
+   const URL = 'http://sandbox.learningregistry.org';
+   const DOC_TYPE = "resource_data";
+   const DOC_VERSION = "0.23.3";
+   const SUBMITTER_TYPE = "agent";
+   const SUBMISSION_TOS = "yes";
+>>>>>>> origin/master
 }
 ?>

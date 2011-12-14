@@ -5,7 +5,6 @@
 
 if(!defined('DS')) define('DS', '/');
 define('LREXEC',1);
-define('LRDIR',dirname(__FILE__));
 
 class LR
 {
@@ -50,11 +49,11 @@ class LR
         $url = LRConfig::getURL().DS.self::getServiceName();
         if(self::getAction() == "POST")
         {
-            if(self::$service->getVerb() != 'default')
+            if(self::$service->getVerb())
             {
                 $url .= DS.self::$service->getVerb();
             }
-            $args = self::getArgs();
+            $args = json_encode(self::getArgs());
             curl_setopt (self::$ch, CURLOPT_POST, true);
             curl_setopt (self::$ch, CURLOPT_POSTFIELDS, $args);
             curl_setopt (self::$ch, CURLOPT_HTTPHEADER, array("Content-type: application/json","Content-length:".strlen(implode(' ',$args))));
@@ -62,11 +61,8 @@ class LR
         }
         if(self::getAction() == "GET")
         {
-            // TODO: str_replace not necessary in PHP 5.3+
+            // TODO: str_replace not necessary in PHP 5.3+ experimental
             $url .= "?".str_replace('+','%20',http_build_query(self::getArgs()));
-        } else { // Other HTTP methods are currently not implemented/allowed
-        	self::setError('HTTP Method '.self::getAction().' not permitted');
-			return false;
         }
         if(self::$debug)  echo 'URL:'.$url;
         curl_setopt (self::$ch, CURLOPT_URL, $url);
@@ -96,7 +92,7 @@ class LR
     */
     public static function getArgs()
     {
-        return self::$service->getArgs();
+        return self::$service->args;
     }
     
     /**
@@ -111,16 +107,7 @@ class LR
         }
         return self::$service->data;
     }
-
-	/*
-	 * Temporary function to get a service (PHP 5.x)
-	 * 
-	*/
-	public static function getService()
-	{
-		return self::$service;
-	}
-
+    
     /**
      * Gets the LR object name currently loaded
      * @return string
