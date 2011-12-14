@@ -4,18 +4,20 @@
 // @license Apache 2.0 License http://www.apache.org/licenses/LICENSE-2.0.html
 defined('LREXEC') or die('Access Denied');
 
+require_once('..'.DS.'lib'.DS.'uuid.php');
+UUID::initRandom();
+
 class LRDocument
-{	
+{
 	public $doc_type = LRConfig::DOC_TYPE;
 	public $doc_version = LRConfig::DOC_VERSION;
 	public $doc_id;
 	public $resource_data;
-	public $resource_data_type;
 	public $keys;
 	public $TOS;
 	public $payload_placement;
+	public $resource_data_type;
 	public $payload_schema;
-	
 	public $active = true;
 	public $resource_locator;
 	public $identity = array(
@@ -30,8 +32,9 @@ class LRDocument
 	 * Constructor
 	 * @param $doc object
 	 */
-	public function __construct($doc)
+	function __construct($doc)
 	{
+		$this->doc_id = UUID::mint(4);
 		$this->resource_data = $doc->resource_data;
 		$this->keys = (array) $doc->keys;
 		$this->TOS = $doc->TOS;
@@ -43,19 +46,9 @@ class LRDocument
 		$this->identity = $doc->identity;
 	}
 	
-	public function setUUID()
-	{
-		if(!class_exists('UUID'))
-		{
-			require_once('..'.DS.'lib'.DS.'uuid.php');
-			UUID::initRandom();
-		}
-		$this->doc_id = UUID::mint(4);
-	}
-	
 	public function sign()
 	{
-		// TODO: Hook up to lib/signature.php gateway to GPG
+		// TODO: Hool up to lib/signature.php gateway to GPG
 		return true;
 	}
 	
