@@ -5,6 +5,8 @@
 require_once('../../lr.php');
 require_once('../../config.php');
 
+// TODO: Get this test under the PHPUnit umbrella
+
 class LRPublishTest
 {
 	public function testPublish()
@@ -19,8 +21,8 @@ class LRPublishTest
 		<!-- comment -->
 		</nsdl_dc:nsdl_dc>
 EOD;
-		$doc_1->keys = array("Test","");
-		$doc_1->tos = LRConfig::SUBMISSION_TOS_URL;
+		$doc_1->keys = array("Test","123");
+		$doc_1->TOS = LRConfig::SUBMISSION_TOS_URL;
 		$doc_1->payload_placement = "inline";
 		$doc_1->resource_data_type = "metadata";
 		$doc_1->payload_schema = array("hashtags","describing");

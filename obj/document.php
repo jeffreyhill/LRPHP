@@ -33,7 +33,7 @@ class LRDocument
 	public function __construct($doc)
 	{
 		$this->resource_data = $doc->resource_data;
-		$this->keys = (array) $doc->keys;
+		$this->keys = $doc->keys;
 		$this->TOS = $doc->TOS;
 		$this->payload_placement = $doc->payload_placement;
 		$this->resource_data_type = $doc->resource_data_type;
