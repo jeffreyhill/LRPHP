@@ -4,24 +4,34 @@
 // @license Apache 2.0 License http://www.apache.org/licenses/LICENSE-2.0.html
 defined('LREXEC') or die('Access Denied');
 
-require_once('..'.DS.'obj'.DS.'document.php');
+require_once('..'.DS.'..'.DS.'obj'.DS.'document.php');
 
 class LRPublish extends LRService
 {
+	protected $documents = array();
 	
 	function __construct()
 	{
 		parent::__construct();
 		$this->action = "POST";
-		$this->verbs = array('default'=>new LRRequest);
 		$this->setVerb('default');
 	}
 
-	function setDocument($document)
+	function addDocument($document)
 	{
-		$document = new LRDocument($document);
-		$this->args = $document->toJSON();
+		$this->documents[] = new LRDocument($document);
 		return true;
 	}
 	
+	function getArgs()
+	{
+		if(empty($this->documents)) return false;
+		$args = '{"documents":[';
+		foreach($this->documents as $document)
+		{
+			$args .= json_encode($document);
+		}
+		$args .= "]}";
+		return $args;
+	}
 }
