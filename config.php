@@ -14,7 +14,7 @@ class LRConfig
 	const SUBMISSION_TOS_URL = "http://www.learningregistry.org/tos/cc0/v0-5";
 	const GPG_METHOD = "LR-PGP.1.0";
 	const GPG_OWNER = "system@tncurriculumcenter.org";
-	const GPG_URL = array("http://beta.tncurriculumcenter.org/GPG/public_key.txt");
+	const GPG_URL = "http://beta.tncurriculumcenter.org/GPG/public_key.txt";
 	
 	public static function getURL()
 	{

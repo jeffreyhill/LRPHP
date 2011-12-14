@@ -2,12 +2,13 @@
 // @package LR-PHP
 // @copyright 2011 Jeffrey Hill
 // @license Apache 2.0 License http://www.apache.org/licenses/LICENSE-2.0.html
-require_once(LRDIR.DS.'lr.php');
-require_once(LRDIR.DS.'config.php');
+require_once('../../lr.php');
+require_once('../../config.php');
 
 class LRPublishTest
 {
-	public function testPublish() {
+	public function testPublish()
+	{
 		
 		$doc_1 = new stdClass();
 		$doc_1->resource_data = 
@@ -29,16 +30,12 @@ EOD;
 			"curator"=>"John Doe",
 			"owner"=>"John Doe",
 			"submitter"=>"John Doe",
-			"signer"=>"", // GPG???
+			"signer"=>LRConfig::GPG_OWNER, // TODO: GPG Public key store provides this?
 			"submitter_type"=>"agent"
 		);
 		LR::init('publish');
 		// Overloaded static calls only work in PHP 5.3+.  Call the service directly to add document
 		LR::getService()->addDocument($doc_1);
-		foreach(LR::getService()->documents as $document)
-		{
-			$this->assertInstanceOf('LRDocument', $document);
-		}
 		$e = LR::execute();
 		if($e == true)
 		{
@@ -49,4 +46,3 @@ EOD;
 }
 
 LRPublishTest::testPublish();
-?>

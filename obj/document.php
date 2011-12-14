@@ -25,7 +25,7 @@ class LRDocument
 		'signer'=>''
 	);
 	
-	protected $digital_signature;
+	public $digital_signature;
 	
 	/*
 	 * Constructor

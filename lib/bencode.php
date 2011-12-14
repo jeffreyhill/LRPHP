@@ -58,19 +58,12 @@ class bencoding
 		switch($type)
 		{
 			case 'integer':
-
 				$out.= 'i' . $value . 'e';
-
 				break;
-
 			case 'string':
-
 				$out.= strlen($value) . ':' . utf8_encode($value);
-
 				break;
-
 			case 'array':
-
 				if(!$this->is_associative($value))
 				{
 					$out.= 'l';
@@ -78,7 +71,6 @@ class bencoding
 					{
 						$out.= $this->encode($entry);
 					}
-
 					$out.= 'e';
 				}
 				else
@@ -89,14 +81,17 @@ class bencoding
 					{
 						$out.= $this->encode($key) . $this->encode($entry);
 					}
-
 					$out.= 'e';
 				}
-
 				break;
-
+			case 'NULL' :
+				$out .= $this->encode((string)'NULL');
+				break;
+			case 'boolean' :
+				$out .= $this->encode((string) $value);
+				break;
 			default:
-				throw new bencoding_exception('type must be integer / string or array');
+				throw new bencoding_exception('type must be integer / string or array.  Type is '.$type);
 				break;
 		}
 

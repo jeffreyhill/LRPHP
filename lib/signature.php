@@ -7,7 +7,7 @@ class LRSignature
 	static function sign_file($hash)
 	{
 		$gpg = new Crypt_GPG();
-		$gpg->addSignKey('wegrata@gmail.com');
+		$gpg->addSignKey(LRConfig::GPG_OWNER);
 		$signature = $gpg->sign($hash, Crypt_GPG::SIGN_MODE_CLEAR);
 		return $signature;
 	}
@@ -22,9 +22,11 @@ class LRSignature
 	{
 		if (is_null($data)){
 			return "null";
-		} else if (is_numeric($data)){
+		} else if (is_numeric($data))
+		{
 			return strval($data);
-		} else if (is_bool($data)){ 
+		} else if (is_bool($data))
+		{
 			return $data ? "true" : "false";
 		}else if(is_array($data)){
 			foreach($data as $subKey => $subValue)
@@ -37,19 +39,20 @@ class LRSignature
 	
 	static function format_data_to_sign(LRDocument $document){
 	    
-		unset($document['digital_signature']);
+		unset($document->digital_signature);
 	
-		unset($document['_id']);
-		unset($document['_rev']);
+		unset($document->_id);
+		unset($document->_rev);
 	
-		unset($document['doc_ID']);
-		unset($document['publishing_node']);
-		unset($document['update_timestamp']);
-		unset($document['node_timestamp']);
-		unset($document['create_timestamp']);
+		unset($document->doc_id);
+		unset($document->publishing_node);
+		unset($document->update_timestamp);
+		unset($document->node_timestamp);
+		unset($document->create_timestamp);
 	
 		$document = self::normalize_data($document);
 		$encoder = new bencoding();
+		$document = (array) $document;
 		$data = utf8_encode($encoder->encode($document));
 		$hash = hash('SHA256',$data);
 		return $hash;

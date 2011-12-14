@@ -4,7 +4,7 @@
 // @license Apache 2.0 License http://www.apache.org/licenses/LICENSE-2.0.html
 defined('LREXEC') or die('Access Denied');
 
-require_once('..'.DS.'obj'.DS.'document.php');
+require_once(LRDIR.DS.'obj'.DS.'document.php');
 
 class LRPublish extends LRService
 {
