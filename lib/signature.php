@@ -1,4 +1,5 @@
 <?php
+defined('LREXEC') or die();
 require_once 'Crypt/GPG.php';
 require_once LRDIR.DS.'lib'.DS.'bencode.php';
 

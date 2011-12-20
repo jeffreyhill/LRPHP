@@ -47,7 +47,7 @@ class LRDocument
 	{
 		if(!class_exists('UUID'))
 		{
-			require_once('..'.DS.'lib'.DS.'uuid.php');
+			require_once(LRDIR.DS.'lib'.DS.'uuid.php');
 			UUID::initRandom();
 		}
 		$this->doc_id = UUID::mint(4);

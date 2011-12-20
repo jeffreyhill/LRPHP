@@ -60,13 +60,13 @@ class LR
             curl_setopt (self::$ch, CURLOPT_HTTPHEADER, array("Content-type: application/json","Content-length:".strlen($args)));
             if(self::$debug) echo $args;
         }
-		else if(self::getAction() == "GET")
+        else if(self::getAction() == "GET")
         {
             // TODO: str_replace not necessary in PHP 5.3+
             $url .= "?".str_replace('+','%20',http_build_query(self::getArgs()));
         } else { // Other HTTP methods are currently not implemented/allowed
-        	self::setError('HTTP Method '.self::getAction().' not permitted');
-			return false;
+            self::setError('HTTP Method '.self::getAction().' not permitted');
+            return false;
         }
         if(self::$debug)  echo 'URL:'.$url;
         curl_setopt (self::$ch, CURLOPT_URL, $url);
@@ -136,7 +136,8 @@ class LR
     
     /**
      * Initializes a request for LR
-     * @return true on success, Exception on failure
+     * @param string service type
+     * @return true on success, false on failure
     */
     public static function init($service)
     {
@@ -145,6 +146,7 @@ class LR
             self::loadService($service);
         } catch (Exception $e) {
             $self::setError($e->getMessage());
+            return false;
         }
         return true;
     }
