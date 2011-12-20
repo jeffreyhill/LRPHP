@@ -1,5 +1,13 @@
 Learning Registry PHP Client Library (LRPHP)
 
-Currently just a scaffold of retrieval services as defined in the LR documentation, with each getting factored out into classes as I tread through it.
+LRPHP is a general-purpose library for PHP that interacts with the Learning Registry.  Services which are implemented are: publish (with signature support), obtain and slice.
 
 Dependencies: min. PHP 5.2.x, cURL, Crypt_GPG
+
+
+License
+-------
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
