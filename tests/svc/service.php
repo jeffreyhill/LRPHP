@@ -16,5 +16,3 @@ class LRServiceTest extends PHPUnit_Framework_TestCase
     $this->assertEquals("default", $result);
   }
 }
-
-?>

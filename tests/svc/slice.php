@@ -78,4 +78,3 @@ class LRSlicesTest extends PHPUnit_Framework_TestCase
      }
    }
 }
-?>

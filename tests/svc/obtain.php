@@ -58,4 +58,3 @@ class LRObtainTest extends PHPUnit_Framework_TestCase
     }
   }
 }
-?>
