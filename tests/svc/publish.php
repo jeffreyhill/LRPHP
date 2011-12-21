@@ -3,15 +3,13 @@
 // @copyright 2011 Jeffrey Hill
 // @license Apache 2.0 License http://www.apache.org/licenses/LICENSE-2.0.html
 require_once('../../lr.php');
-require_once('../../config.php');
 
 // TODO: Get this test under the PHPUnit umbrella
 
-class LRPublishTest
+class LRPublishTest extends PHPUnit_Framework_TestCase
 {
 	public function testPublish()
 	{
-		
 		$doc_1 = new stdClass();
 		$doc_1->resource_data = 
 <<<EOD
@@ -39,12 +37,9 @@ EOD;
 		// Overloaded static calls only work in PHP 5.3+.  Call the service directly to add document
 		LR::getService()->addDocument($doc_1);
 		$e = LR::execute();
-		if($e == true)
+		if($this->assertTrue($e))
 		{
 		    print_r(LR::getResponse());
 		} else print_r(LR::getErrors());
-		// $this->assertFalse(TRUE);
 	}
 }
-
-LRPublishTest::testPublish();
