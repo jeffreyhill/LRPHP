@@ -3,11 +3,13 @@
 // @copyright 2011 Jeffrey Hill/Jason Hoekstra
 // @license Apache 2.0 License http://www.apache.org/licenses/LICENSE-2.0.html
 defined('LREXEC') or die('Access Denied');
+require_once(LRDIR.DS.'obj'.DS.'resource.php');
 
 class LRDocument
-{	
+{
 	public $doc_type = LRConfig::DOC_TYPE;
 	public $doc_version = LRConfig::DOC_VERSION;
+	public $resource;
 	public $resource_data;
 	public $resource_data_type;
 	public $keys;
@@ -32,7 +34,7 @@ class LRDocument
 	 */
 	public function __construct($doc)
 	{
-		$this->resource_data = $doc->resource_data;
+		$this->resource_data = new LRResource($doc->resource_data);
 		$this->keys = $doc->keys;
 		$this->TOS = $doc->TOS;
 		$this->payload_placement = $doc->payload_placement;
@@ -51,6 +53,14 @@ class LRDocument
 			UUID::initRandom();
 		}
 		$this->doc_id = UUID::mint(4);
+	}
+	
+	public function package()
+	{
+		if(is_a('LRResource',$this->resource_data))
+		{
+			$this->resource_data = $this->resource_data->package();
+		}
 	}
 	
 	public function sign()
